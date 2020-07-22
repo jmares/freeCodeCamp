@@ -1,0 +1,73 @@
+body {
+    background-color: #F1E3C0;
+    margin: 0;
+    padding: 0;
+}
+
+#main {
+  max-width: 1000px;
+  min-width: 400px;
+  margin: 0 auto;
+}
+
+header {
+  background-image: url("https://www.rockymtnresorts.com/wp-content/uploads/2019/03/rocky-mountain-resorts-home1.jpg");
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 10px;
+}
+
+#title {
+  font-family: 'Mr Dafoe', cursive;
+  font-size: 50px;
+  margin: 0 auto;
+}
+
+#title span {
+  background: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  padding: 5px 30px;
+}
+
+header p span{
+  background: rgba(255, 255, 255, 0.5);
+  margin: 0px auto;
+  color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  font-size: 20px;
+  margin: 0 auto;
+  padding: 5px 10px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+#img-caption {
+  margin: 20px auto;
+}
+
+#img-caption span {
+  margin: 10px auto;
+  font-style: italic;
+  background-color: #F1E3C0;
+  padding: 5px 10px;
+}
+
+#tribute-info {
+    font-size: 20px;
+    margin: 10px;
+}
+
+footer {
+  margin: 10px 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 10px;
+}
