@@ -7,6 +7,8 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -29,31 +31,37 @@ header > section {
     width: 100%; 
 }
 
-  #nav-bar > div > p {
-      color: white;
-      padding-top: 5px;
-      font-size: 20px;
-  }
+#nav-bar > div > p {
+    color: white;
+    padding-top: 5px;
+    font-size: 25px;
+}
   
-  /* Links inside the navbar */
-  #nav-bar a {
+/* Links inside the navbar */
+#nav-bar ul a {
     float: left;
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 16px;
     text-decoration: none;
-  }
+    font-size: 20px;
+}
   
-  /* Change background on mouse-over */
-  #nav-bar a:hover {
+/* Change background on mouse-over */
+#nav-bar a:hover {
     background: #ddd;
     color: black;
-  }
-  #nav-bar > ul {
+}
+
+#nav-bar p {
+    margin: 5px;
+}
+#nav-bar > ul {
     display: flex;
     flex-direction: row;
     list-style: none;
+    margin: 0;
 }
 
 #container {
@@ -66,8 +74,9 @@ header > section {
 }
 
 main {
-    max-width: 900px;
+    max-width: 950px;
     margin: 25px auto;
+    padding: 0;
 }
 
 #book {
@@ -109,7 +118,7 @@ iframe, object, embed {
     flex: 70%;
     max-width: 70%;}
 
-figure {
+#book figure {
     border: 1px solid black;
     border-radius: 5px;
     margin: 10px;
@@ -117,14 +126,54 @@ figure {
     flex: 30%;
     max-width: 30%;
 }
-figure img {
+#book figure img {
     max-width: 100%;
     display: block;
     height: auto;
     border-radius: 5px;
 }
-figcaption {
+#book figcaption {
     padding-top: 5px;
     font-style: italic;
     text-align: center;
+}
+
+#other {
+    display: flex;
+    flex-direction: column;
+}
+
+#items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.item {
+    max-width: 145px;
+    margin: 5px;
+}
+
+.item h4 {
+    font-size: 12px;
+}
+.item p {
+    font-size: 12px;;
+}
+
+.item figure {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+.item figure img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+    border-radius: 5px;
+}
+.item figcaption {
+    padding-top: 5px;
 }
