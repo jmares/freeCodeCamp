@@ -2,14 +2,15 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>FCC RWD Product Landing Page</title>
         <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet"> 
     </head>
     <body>
         <header id="header">
             <nav id="nav-bar">
                 <a href="#header"><img src="open_book.png" alt="logo" id="header-img"></a>
-                <div><p>The BookShop</p></div>
+                <h3>The BookShop</h3>
                 <ul>
                     <li><a href="#book" class="nav-link">book</a></li>
                     <li><a href="#video" class="nav-link">video</a></li>
@@ -43,12 +44,12 @@
                         <p>Holden and Miller must thread the needle between the Earth government, the Outer Planet revolutionaries and secret corporations, and the odds are against them. But out in the Belt, the rules are different, and one small ship can change the fate of the universe.</p>
                     </div>
                 </section>
-                <section id="video">
-                    <!-- <iframe width="700" height="395" src="https://www.youtube.com/embed/M0QwBp_da28" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-                    <iframe src='https://www.youtube.com/embed/M0QwBp_da28' frameborder='0' allowfullscreen></iframe>
+                <section id="prime">
+                    <h3>Now a Prime Original Series</h3>
+                    <iframe id="video" src='https://www.youtube.com/embed/M0QwBp_da28' allowfullscreen></iframe>
                 </section>
                 <section id="other">
-                    <p> If you liked <em>Leviathan Wakes</em>, you might also like:</p>
+                    <h3>If you liked <em>Leviathan Wakes</em>, you might also like:</h3>
                     <div id="items">
                         <div class="item">
                             <figure>
@@ -113,17 +114,19 @@
                     </div>
                 </section>
                 <section id="subscribe">
+                    <h3>Join the community</h3>
                     <form id="form" action="https://www.freecodecamp.com/email-submit" method="post">
-                        <p></p>
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" placeholder="enter your email here" required>
-                        <input type="submit" value="Subscribe">
+                        <input type="submit" id="submit" value="Subscribe">
                     </form>
                 </section>
             </main>
             <footer>
+                <div>&copy; 2020 johmar</div>
+                <div>Contact</div>
+                <div>Privacy | Terms</div>
             </footer>
         </div>
-
     </body>
 </html>

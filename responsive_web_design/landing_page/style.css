@@ -7,14 +7,26 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
 }
 
+#header h1, #header h2, #nav-bar h3 {
+    font-family: 'Satisfy', cursive;
+} 
 
-header > section {
+#header h1 {
+    font-size: 60px;
+}
+
+#header h2 {
+    font-size: 30px;
+}
+
+#header > section {
     color: white;
-    margin: 150px auto;
+    margin: 150px auto 50px auto;
     text-align: center;
 }
 
@@ -31,13 +43,13 @@ header > section {
     width: 100%; 
 }
 
-#nav-bar > div > p {
+#nav-bar h3 {
     color: white;
-    padding-top: 5px;
+    padding-top: 10px;
     font-size: 25px;
+    margin: 0;
 }
   
-/* Links inside the navbar */
 #nav-bar ul a {
     float: left;
     display: block;
@@ -48,15 +60,11 @@ header > section {
     font-size: 20px;
 }
   
-/* Change background on mouse-over */
-#nav-bar a:hover {
+#nav-bar ul a:hover {
     background: #ddd;
     color: black;
 }
 
-#nav-bar p {
-    margin: 5px;
-}
 #nav-bar > ul {
     display: flex;
     flex-direction: row;
@@ -79,37 +87,18 @@ main {
     padding: 0;
 }
 
+main section {
+    margin-bottom: 30px;
+}
+
 #book {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
 }
 
-/* #video {
-    display: flex;
-    flex-direction: row;;
-    justify-content: center;
-}
-
-iframe {
-    max-width: 700;
-    height: auto;
-} */
-
-#video {
-    position: relative; 
-    padding-bottom: 56.25%; 
-    height: 0; 
-    overflow: hidden; 
-    max-width: 100%; 
-}
-
-iframe, object, embed { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
+#book h2 {
+    margin-top: 0;
 }
 
 #book div {
@@ -126,16 +115,36 @@ iframe, object, embed {
     flex: 30%;
     max-width: 30%;
 }
+
 #book figure img {
     max-width: 100%;
     display: block;
     height: auto;
     border-radius: 5px;
 }
+
 #book figcaption {
     padding-top: 5px;
     font-style: italic;
     text-align: center;
+}
+
+#prime {
+    position: relative; 
+    padding-bottom: 56.25%; 
+    height: 0; 
+    overflow: hidden; 
+    max-width: 100%; 
+}
+
+iframe { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 #other {
@@ -147,6 +156,7 @@ iframe, object, embed {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .item {
@@ -174,6 +184,52 @@ iframe, object, embed {
     height: auto;
     border-radius: 5px;
 }
+
 .item figcaption {
     padding-top: 5px;
+}
+
+#other h3, #subscribe h3 {
+    text-align: center;
+}
+
+#form {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    align-items: baseline;
+    justify-content: center;
+}
+
+#form input {
+    font-size: 20px;
+}
+
+#form label, #submit, #email {
+    margin: 5px 10px;
+}
+
+#email {
+    width: 50%;
+}
+
+footer {
+    border-top: 3px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 15px 0;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 650px) {
+    #header h2 {
+        font-size: 20px;
+    }
+    #nav-bar h3 {
+        display: none;
+    }
+    #form, #form input {
+        font-size: 16px;
+    }
 }
