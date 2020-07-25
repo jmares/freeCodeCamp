@@ -24,40 +24,33 @@
             </nav>
             <main id="main-doc">
                 <section id="" class="main-section">
-                    <header>Introduction</header>
+                    <header><h2>Introduction</h2></header>
                     <p><strong>Nginx</strong> is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the internet. It is a lightweight choice that can be used as either a web server or reverse proxy.</p>
                     <p>In this guide, we’ll discuss how to install Nginx on your Ubuntu 20.04 server, adjust the firewall, manage the Nginx process, and set up server blocks for hosting more than one domain from a single server.</p>
                 </section>
                 <section id="" class="main-section">
-                    <header>Prerequisites</header>
+                    <header><h2>Prerequisites</h2></header>
                     <p>Before you begin this guide, you should have a regular, non-root user with sudo privileges configured on your server. You can learn how to configure a regular user account by following our Initial server setup guide for Ubuntu 20.04.</p>
                     <p>When you have an account available, log in as your non-root user to begin.</p>
                 </section>
                 <section id="" class="main-section">
-                    <header>Installing Nginx</header>
+                    <header><h2>Installing Nginx</h2></header>
                     <p>Because Nginx is available in Ubuntu’s default repositories, it is possible to install it from these repositories using the <code>apt</code> packaging system.</p>
                     <p>Since this is our first interaction with the <code>apt</code> packaging system in this session, we will update our local package index so that we have access to the most recent package listings. Afterwards, we can install <code>nginx</code>:</p>
-                    <pre>
-sudo apt update
-sudo apt install nginx                    
-                    </pre>
+<pre><span class="no-select">$ </span>sudo apt update
+<span class="no-select">$ </span>sudo apt install nginx</pre>
                 </section>
                 <section id="" class="main-section">
-                    <header>Adjusting the Firewall</header>
+                    <header><h2>Adjusting the Firewall</h2></header>
                     <p>Before testing Nginx, the firewall software needs to be adjusted to allow access to the service. Nginx registers itself as a service with <code>ufw</code> upon installation, making it straightforward to allow Nginx access.</p>
                     <p>List the application configurations that <code>ufw</code> knows how to work with by typing:</p>
-                    <pre>
-sudo ufw app list
-                    </pre>
+                    <pre><span class="no-select">$ </span>sudo ufw app list</pre>
                     <p>You should get a listing of the application profiles:</p>
-                    <pre>
-Output
-Available applications:
+<pre>Available applications:
     Nginx Full
     Nginx HTTP
     Nginx HTTPS
-    OpenSSH                        
-                    </pre>
+    OpenSSH</pre>
                     <p>As demonstrated by the output, there are three profiles available for Nginx:</p>
                     <ul>
                         <li><strong>Nginx Full</strong>: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic)</li>
@@ -66,39 +59,132 @@ Available applications:
                     </ul>
                     <p>It is recommended that you enable the most restrictive profile that will still allow the traffic you’ve configured. Right now, we will only need to allow traffic on port 80.</p>
                     <p>You can enable this by typing:</p>
-                    <pre>sudo ufw allow 'Nginx HTTP'</pre>
+                    <pre><span class="no-select">$ </span>sudo ufw allow 'Nginx HTTP'</pre>
                     <p>You can verify the change by typing:</p>
-                    <pre>sudo ufw status</pre>
+                    <pre><span class="no-select">$ </span>sudo ufw status</pre>
                     <p>The output will indicated which HTTP traffic is allowed:</p>
-                    <pre>
-Output
-Status: active
+<pre>Status: active
 
 To                         Action      From
 --                         ------      ----
 OpenSSH                    ALLOW       Anywhere                  
 Nginx HTTP                 ALLOW       Anywhere                  
 OpenSSH (v6)               ALLOW       Anywhere (v6)             
-Nginx HTTP (v6)            ALLOW       Anywhere (v6)                        
-                    </pre>
+Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                 </section>
                 <section id="" class="main-section">
-                    <header>Checking your Web Server</header>
+                    <header><h2>Checking your Web Server</h2></header>
+                    <p>At the end of the installation process, Ubuntu 20.04 starts Nginx. The web server should already be up and running.</p>
+                    <p>We can check with the <code>systemd</code> init system to make sure the service is running by typing:</p>
+<pre>nginx.service - A high performance web server and a reverse proxy server
+    Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+    Active: active (running) since Fri 2020-04-20 16:08:19 UTC; 3 days ago
+      Docs: man:nginx(8)
+  Main PID: 2369 (nginx)
+     Tasks: 2 (limit: 1153)
+    Memory: 3.5M
+    CGroup: /system.slice/nginx.service
+            ├─2369 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+            └─2380 nginx: worker process</pre>
+                    <p>As confirmed by this out, the service has started successfully. However, the best way to test this is to actually request a page from Nginx.</p>
+                    <p>You can access the default Nginx landing page to confirm that the software is running properly by navigating to your server’s IP address. If you do not know your server’s IP address, you can find it by using the icanhazip.com tool, which will give you your public IP address as received from another location on the internet:</p>
+                    <pre><span class="no-select">$ </span>curl -4 icanhazip.com</pre>
+                    <p>When you have your server’s IP address, enter it into your browser’s address bar:</p>
+                    <pre><span class="no-select">$ </span>http://<em>your_server_ip</em></pre>
+                    <p>You should receive the default Nginx landing page:</p>
+                    <p>IMAGE ???</p>
+                    <p>If you are on this page, your server is running correctly and is ready to be managed.</p>
                 </section>
                 <section id="" class="main-section">
-                    <header>Managing the Nginx Process</header>
+                    <header><h2>Managing the Nginx Process</h2></header>
+                    <p>Now that you have your web server up and running, let’s review some basic management commands.</p>
+                    <p>To stop your web server, type:</p>
+                    <pre><span class="no-select">$ </span>sudo systemctl stop nginx</pre>
+                    <p>To start the web server when it is stopped, type:</p>
+                    <pre><span class="no-select">$ </span>sudo systemctl start nginx</pre>
+                    <p>To stop and then start the service again, type:</p>
+                    <pre><span class="no-select">$ </span>sudo systemctl restart nginx</pre>
+                    <p>If you are only making configuration changes, Nginx can often reload without dropping connections. To do this, type:</p>
+                    <pre><span class="no-select">$ </span>sudo systemctl reload nginx</pre>
+                    <p>By default, Nginx is configured to start automatically when the server boots. If this is not what you want, you can disable this behavior by typing:</p>
+                    <pre><span class="no-select">$ </span>sudo systemctl disable nginx</pre>
+                    <p>To re-enable the service to start up at boot, you can type:</p>
+                    <pre><span class="no-select">$ </span>sudo systemctl enable nginx</pre>
+                    <p>You have now learned basic management commands and should be ready to configure the site to host more than one domain. </p>
                 </section>
                 <section id="" class="main-section">
-                    <header>Setting Up Server Blocks</header>
+                    <header><h2>Setting Up Server Blocks</h2></header>
+                    <p>When using the Nginx web server, server blocks (similar to virtual hosts in Apache) can be used to encapsulate configuration details and host more than one domain from a single server. We will set up a domain called <strong>your_domain</strong>, but you should <strong>replace this with your own domain name</strong>. To learn more about setting up a domain name with DigitalOcean, please refer to our Introduction to DigitalOcean DNS.</p>
+                    <p>Nginx on Ubuntu 20.04 has one server block enabled by default that is configured to serve documents out of a directory at <code>/var/www/html</code>. While this works well for a single site, it can become unwieldy if you are hosting multiple sites. Instead of modifying <code>/var/www/html</code>, let’s create a directory structure within <code>/var/www/</code> for our <strong>your_domain</strong> site, leaving <code>/var/www/html</code> in place as the default directory to be served if a client request doesn’t match any other sites.</p>
+                    <p>Create the directory for <strong>your_domain</strong> as follows, using the <code>-p</code> flag to create any necessary parent directories:</p>
+                    <pre><span class="no-select">$ </span>sudo mkdir -p /var/www/<em>your_domain/html</em></pre>
+                    <p>Next, assign ownership of the directory with the <code>$USER</code> environment variable:</p>
+                    <pre><span class="no-select">$ </span>sudo chown -R $USER:$USER /var/www/<em>your_domain/html</em></pre>
+                    <p>The permissions of your web roots should be correct if you haven’t modified your <code>umask</code> value, which sets default file permissions. To ensure that your permissions are correct and allow the owner to read, write, and execute the files while granting only read and execute permissions to groups and others, you can input the following command:</p>
+                    <pre><span class="no-select">$ </span>sudo chmod -R 755 /var/www/<em>your_domain</em></pre>
+                    <p>Next, create a sample <code>index.html</code> page using <code>nano</code> or your favorite editor:</p>
+                    <pre><span class="no-select">$ </span>nano /var/www/<em>your_domain</em>/html/index.html</pre>
+                    <p>Inside, add the following sample HTML:</p>
+<pre>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Welcome to your_domain!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Success!  The your_domain server block is working!&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+                    <p>Save and close the file by typing <code>CTRL</code> and <code>X</code> then <code>Y</code> and <code>ENTER</code> when you are finished.</p>
+                    <p>In order for Nginx to serve this content, it’s necessary to create a server block with the correct directives. Instead of modifying the default configuration file directly, let’s make a new one at <code>/etc/nginx/sites-available/<em>your_domain</em></code></p>
+                    <pre><span class="no-select">$ </span>sudo nano /etc/nginx/sites-available/<em>your_domain</em></pre>
+                    <p>Paste in the following configuration block, which is similar to the default, but updated for our new directory and domain name:</p>
+<pre>server {
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/your_domain/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name your_domain www.your_domain;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}</pre>
+                    <p>Notice that we’ve updated the <code>root</code> configuration to our new directory, and the <code>server_name</code> to our domain name.</p>
+                    <p></p>
+                    <pre><span class="no-select">$ </span>nano /var/www/<em>your_domain</em>/html/index.html</pre>           
+                    <p>Next, let’s enable the file by creating a link from it to the <code>sites-enabled</code> directory, which Nginx reads from during startup:</p>         
+                    <pre><span class="no-select">$ </span>sudo ln -s /etc/nginx/sites-available/<em>your_domain</em> /etc/nginx/sites-enabled/</pre>      
+                    <p>Two server blocks are now enabled and configured to respond to requests based on their <code>listen</code> and <code>server_name</code> directives (you can read more about how Nginx processes these directives here):</p>     
+                    <ul>
+                        <li><code>your_domain</code>: Will respond to requests for <code>your_domain</code> and <code>www.your_domain</code></li>
+                        <li><code>default</code>: Will respond to any requests on port 80 that do not match the other two blocks</li>
+                    </ul>
+                    <p>To avoid a possible hash bucket memory problem that can arise from adding additional server names, it is necessary to adjust a single value in the <code>/etc/nginx/nginx.conf</code> file. Open the file:</p>
+                    <pre><span class="no-select">$ </span>sudo nano /etc/nginx/nginx.conf</pre>
+                    <p>Find the <code>server_names_hash_bucket_size</code> directive and remove the <code>#</code> symbol to uncomment the line. If you are using nano, you can quickly search for words in the file by pressing <code>CTRL</code> and <code>W</code>.</p>
+<pre>...
+    http {
+        ...
+        server_names_hash_bucket_size 64;
+        ...
+    }
+...</pre>
+                    <p>Save and close the file when you are finished.</p>
+                    <p>Next, test to make sure that there are no syntax errors in any of your Nginx files:</p>
+                    <pre><span class="no-select">$ </span>sudo nginx -t</pre>
+                    <p>If there aren’t any problems, restart Nginx to enable your changes:</p>
+                    <pre><span class="no-select">$ </span>sudo systemctl restart nginx</pre>
+                    <p>Nginx should now be serving your domain name. You can test this by navigating to <code>http://your_domain</code>, where you should see something like this:</p>
                 </section>
                 <section id="" class="main-section">
-                    <header>Nginx Files and Directories</header>
+                    <header><h2>Nginx Files and Directories</h2></header>
                 </section>
                 <section id="" class="main-section">
-                    <header>Conclusion</header>
+                    <header><h2>Conclusion</h2></header>
                 </section>
                 <section id="" class="main-section">
-                    <header>More Information</header>
+                    <header><h2>More Information</h2></header>
                 </section>
             </main>
         </div>        
