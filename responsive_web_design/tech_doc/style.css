@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+#navbar {
+    min-width: 290px;
+    background-color: darkgray;
+    height: 80%;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;  
+}
+
+#navbar ul {
+}
+#main-doc {
+    background-color: lavender;
+    display: block;
+    margin: 0 15px;
+    padding: 10px;
+}
+
+@media screen and (max-width:600px) {
+    #container {
+        flex-direction: column;
+    }
+    #navbar {
+        width: 100%;
+    }
+}
