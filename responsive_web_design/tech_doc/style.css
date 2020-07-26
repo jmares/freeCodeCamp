@@ -3,6 +3,10 @@
     box-sizing: inherit;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+
 body {
     margin: 0;
     padding: 0;
@@ -19,23 +23,54 @@ body {
     padding: 0;
 }
 #navbar {
+    font-family: 'Roboto', sans-serif;
     position: fixed;
     top: 0;
     left: 0;
     min-width: 290px;
-    background-color: darkgray;
+    width: 300px;
+    height: 100%;
+    background-color: ghostwhite;
+    border-right: 2px solid rgba(0, 22, 22, 0.4);;
+}
+
+#navbar header {
+    margin: 10px auto;
+    text-align: center;
+}
+
+#navbar ul {
+    list-style: none;
+    margin: 0;
     height: 80%;
     padding: 0;
     overflow-y: auto;
     overflow-x: hidden;  
 }
 
-#navbar ul {
+#navbar li {
+    border-top: 1px solid;
+    position: relative;
+    width: 100%
 }
+
+#navbar a {
+    text-decoration: none;
+    display: block;
+    color: darkslategray;
+    padding: 15px 25px;
+    cursor: pointer;
+}
+
+#navbar a:hover {
+    background-color: gainsboro;
+}
+
 #main-doc {
     background-color: white;
     position: absolute;
     margin-left: 300px;
+    font-family: 'Roboto', sans-serif;
     /*display: block;*/
     padding: 10px;
 }
@@ -63,9 +98,9 @@ pre {
 } */
 
 pre, code {
-    font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    font-family: 'Source Code Pro', "Lucida Console", "Lucida Sans Typewriter", "Courier New", Courier, monospace;
     background-color: #f1f3f4;
-    color: #37474f;
+    color: dimgrey;
 }
 code {
     padding-left: 2px;
@@ -73,6 +108,7 @@ code {
 }
 .no-select {
     user-select: none;
+    color: darkgray;
 }
 
 @media screen and (max-width:600px) {

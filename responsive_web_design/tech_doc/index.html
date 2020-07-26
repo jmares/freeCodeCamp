@@ -8,39 +8,46 @@
     <body>
         <div id="container">
             <nav id="navbar">
-                <header>Nginx Installation</header>
+                <header><h3>Nginx Installation</h3></header>
                 <ul>
-                    <li><a href="#" class="nav-link">Introduction</a></li>
-                    <li><a href="#" class="nav-link">Prerequisites</a></li>
-                    <li><a href="#" class="nav-link">Installing Nginx</a></li>
-                    <li><a href="#" class="nav-link">Adjusting the Firewall</a></li>
-                    <li><a href="#" class="nav-link">Checking your Web Server</a></li>
-                    <li><a href="#" class="nav-link">Managing the Nginx Process</a></li>
-                    <li><a href="#" class="nav-link">Setting Up Server Blocks</a></li>
-                    <li><a href="#" class="nav-link">Nginx Files and Directories</a></li>
-                    <li><a href="#" class="nav-link">Conclusion</a></li>
-                    <li><a href="#" class="nav-link">More information</a></li>
+                    <li><a href="#Introduction" class="nav-link">Introduction</a></li>
+                    <li><a href="#Prerequisites" class="nav-link">Prerequisites</a></li>
+                    <li><a href="#Installing_Nginx" class="nav-link">Installing Nginx</a></li>
+                    <li><a href="#Adjusting_the_Firewall" class="nav-link">Adjusting the Firewall</a></li>
+                    <li><a href="#Checking_your_Web_Server" class="nav-link">Checking your Web Server</a></li>
+                    <li><a href="#Managing_the_Nginx_Process" class="nav-link">Managing the Nginx Process</a></li>
+                    <li><a href="#Setting_Up_Server_Blocks" class="nav-link">Setting Up Server Blocks</a></li>
+                    <li><a href="#Nginx_Files_and_Directories" class="nav-link">Nginx Files and Directories</a></li>
+                    <li><a href="#Conclusion" class="nav-link">Conclusion</a></li>
+                    <li><a href="#More_Information" class="nav-link">More information</a></li>
                 </ul>
             </nav>
             <main id="main-doc">
-                <section id="" class="main-section">
+                <header>
+                    <h1>How To Install Nginx on Ubuntu 20.04</h1>
+                </header>
+
+                <section id="Introduction" class="main-section">
                     <header><h2>Introduction</h2></header>
                     <p><strong>Nginx</strong> is one of the most popular web servers in the world and is responsible for hosting some of the largest and highest-traffic sites on the internet. It is a lightweight choice that can be used as either a web server or reverse proxy.</p>
                     <p>In this guide, we’ll discuss how to install Nginx on your Ubuntu 20.04 server, adjust the firewall, manage the Nginx process, and set up server blocks for hosting more than one domain from a single server.</p>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Prerequisites" class="main-section">
                     <header><h2>Prerequisites</h2></header>
                     <p>Before you begin this guide, you should have a regular, non-root user with sudo privileges configured on your server. You can learn how to configure a regular user account by following our Initial server setup guide for Ubuntu 20.04.</p>
                     <p>When you have an account available, log in as your non-root user to begin.</p>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Installing_Nginx" class="main-section">
                     <header><h2>Installing Nginx</h2></header>
                     <p>Because Nginx is available in Ubuntu’s default repositories, it is possible to install it from these repositories using the <code>apt</code> packaging system.</p>
                     <p>Since this is our first interaction with the <code>apt</code> packaging system in this session, we will update our local package index so that we have access to the most recent package listings. Afterwards, we can install <code>nginx</code>:</p>
 <pre><span class="no-select">$ </span>sudo apt update
 <span class="no-select">$ </span>sudo apt install nginx</pre>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Adjusting_the_Firewall" class="main-section">
                     <header><h2>Adjusting the Firewall</h2></header>
                     <p>Before testing Nginx, the firewall software needs to be adjusted to allow access to the service. Nginx registers itself as a service with <code>ufw</code> upon installation, making it straightforward to allow Nginx access.</p>
                     <p>List the application configurations that <code>ufw</code> knows how to work with by typing:</p>
@@ -72,7 +79,8 @@ Nginx HTTP                 ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)             
 Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Checking_your_Web_Server" class="main-section">
                     <header><h2>Checking your Web Server</h2></header>
                     <p>At the end of the installation process, Ubuntu 20.04 starts Nginx. The web server should already be up and running.</p>
                     <p>We can check with the <code>systemd</code> init system to make sure the service is running by typing:</p>
@@ -95,7 +103,8 @@ Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                     <p>IMAGE ???</p>
                     <p>If you are on this page, your server is running correctly and is ready to be managed.</p>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Managing_the_Nginx_Process" class="main-section">
                     <header><h2>Managing the Nginx Process</h2></header>
                     <p>Now that you have your web server up and running, let’s review some basic management commands.</p>
                     <p>To stop your web server, type:</p>
@@ -112,7 +121,8 @@ Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                     <pre><span class="no-select">$ </span>sudo systemctl enable nginx</pre>
                     <p>You have now learned basic management commands and should be ready to configure the site to host more than one domain. </p>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Setting_Up_Server_Blocks" class="main-section">
                     <header><h2>Setting Up Server Blocks</h2></header>
                     <p>When using the Nginx web server, server blocks (similar to virtual hosts in Apache) can be used to encapsulate configuration details and host more than one domain from a single server. We will set up a domain called <strong>your_domain</strong>, but you should <strong>replace this with your own domain name</strong>. To learn more about setting up a domain name with DigitalOcean, please refer to our Introduction to DigitalOcean DNS.</p>
                     <p>Nginx on Ubuntu 20.04 has one server block enabled by default that is configured to serve documents out of a directory at <code>/var/www/html</code>. While this works well for a single site, it can become unwieldy if you are hosting multiple sites. Instead of modifying <code>/var/www/html</code>, let’s create a directory structure within <code>/var/www/</code> for our <strong>your_domain</strong> site, leaving <code>/var/www/html</code> in place as the default directory to be served if a client request doesn’t match any other sites.</p>
@@ -177,14 +187,37 @@ Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                     <pre><span class="no-select">$ </span>sudo systemctl restart nginx</pre>
                     <p>Nginx should now be serving your domain name. You can test this by navigating to <code>http://your_domain</code>, where you should see something like this:</p>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Nginx_Files_and_Directories" class="main-section">
                     <header><h2>Nginx Files and Directories</h2></header>
+                    <p>Now that you know how to manage the Nginx service itself, you should take a few minutes to familiarize yourself with a few important directories and files.</p>
+                    <h3>Content</h3>
+                    <ul>
+                        <li><code>/var/www/html</code>: The actual web content, which by default only consists of the default Nginx page you saw earlier, is served out of the <code>/var/www/html</code> directory. This can be changed by altering Nginx configuration files.</li>
+                    </ul>
+                    <h3>Server Configuration</h3>
+                    <ul>
+                        <li><code>/etc/nginx</code>: The Nginx configuration directory. All of the Nginx configuration files reside here.</li>
+                        <li><code>/etc/nginx/nginx.conf</code>: The main Nginx configuration file. This can be modified to make changes to the Nginx global configuration.</li>
+                        <li><code>/etc/nginx/sites-available/</code>: The directory where per-site server blocks can be stored. Nginx will not use the configuration files found in this directory unless they are linked to the <code>sites-enabled</code> directory. Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory.</li>
+                        <li><code>/etc/nginx/sites-enabled/</code>: The directory where enabled per-site server blocks are stored. Typically, these are created by linking to configuration files found in the <code>sites-available</code> directory.</li>
+                        <li><code>/etc/nginx/snippets</code>: This directory contains configuration fragments that can be included elsewhere in the Nginx configuration. Potentially repeatable configuration segments are good candidates for refactoring into snippets.</li>
+                    </ul>
+                    <h3>Server Logs</h3>
+                    <ul>
+                        <li><code>/var/log/nginx/access.log</code>: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.</li>
+                        <li><code>/var/log/nginx/error.log</code>: Any Nginx errors will be recorded in this log.</li>
+                    </ul>
                 </section>
-                <section id="" class="main-section">
+
+                <section id="Conclusion" class="main-section">
                     <header><h2>Conclusion</h2></header>
+                    <p>Now that you have your web server installed, you have many options for the type of content to serve and the technologies you want to use to create a richer experience.</p>
+                    <p>If you’d like to build out a more complete application stack, check out the article <a href="">How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 20.04.</a>.</p>
                 </section>
                 <section id="" class="main-section">
                     <header><h2>More Information</h2></header>
+
                 </section>
             </main>
         </div>        
