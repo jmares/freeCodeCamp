@@ -19,12 +19,13 @@
                     <li><a href="#Setting_Up_Server_Blocks" class="nav-link">Setting Up Server Blocks</a></li>
                     <li><a href="#Nginx_Files_and_Directories" class="nav-link">Nginx Files and Directories</a></li>
                     <li><a href="#Conclusion" class="nav-link">Conclusion</a></li>
-                    <li><a href="#More_Information" class="nav-link">More information</a></li>
+                    <li><a href="#Credits" class="nav-link">Credits</a></li>
                 </ul>
             </nav>
             <main id="main-doc">
                 <header>
                     <h1>How To Install Nginx on Ubuntu 20.04</h1>
+                    <p>By johmar | Posted on <time datetime="2020-07-28">June 28, 2020</time></p>
                 </header>
 
                 <section id="Introduction" class="main-section">
@@ -35,7 +36,7 @@
 
                 <section id="Prerequisites" class="main-section">
                     <header><h2>Prerequisites</h2></header>
-                    <p>Before you begin this guide, you should have a regular, non-root user with sudo privileges configured on your server. You can learn how to configure a regular user account by following our Initial server setup guide for Ubuntu 20.04.</p>
+                    <p>Before you begin this guide, you should have a regular, non-root user with sudo privileges configured on your server. You can learn how to configure a regular user account by following our <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04" target="_blank">Initial server setup guide for Ubuntu 20.04.</a></p>
                     <p>When you have an account available, log in as your non-root user to begin.</p>
                 </section>
 
@@ -45,6 +46,7 @@
                     <p>Since this is our first interaction with the <code>apt</code> packaging system in this session, we will update our local package index so that we have access to the most recent package listings. Afterwards, we can install <code>nginx</code>:</p>
 <pre><span class="no-select">$ </span>sudo apt update
 <span class="no-select">$ </span>sudo apt install nginx</pre>
+                    <p>After accepting the procedure, <code>apt</code> will install Nginx and any required dependencies to your server.</p>
                 </section>
 
                 <section id="Adjusting_the_Firewall" class="main-section">
@@ -84,9 +86,10 @@ Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                     <header><h2>Checking your Web Server</h2></header>
                     <p>At the end of the installation process, Ubuntu 20.04 starts Nginx. The web server should already be up and running.</p>
                     <p>We can check with the <code>systemd</code> init system to make sure the service is running by typing:</p>
+                    <pre><span class="no-select">$ </span>systemctl status nginx</pre>
 <pre>nginx.service - A high performance web server and a reverse proxy server
     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-    Active: active (running) since Fri 2020-04-20 16:08:19 UTC; 3 days ago
+    Active: <span class="highlight">active (running)</span> since Fri 2020-04-20 16:08:19 UTC; 3 days ago
       Docs: man:nginx(8)
   Main PID: 2369 (nginx)
      Tasks: 2 (limit: 1153)
@@ -98,9 +101,9 @@ Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                     <p>You can access the default Nginx landing page to confirm that the software is running properly by navigating to your server’s IP address. If you do not know your server’s IP address, you can find it by using the icanhazip.com tool, which will give you your public IP address as received from another location on the internet:</p>
                     <pre><span class="no-select">$ </span>curl -4 icanhazip.com</pre>
                     <p>When you have your server’s IP address, enter it into your browser’s address bar:</p>
-                    <pre><span class="no-select">$ </span>http://<em>your_server_ip</em></pre>
+                    <pre><span class="no-select">$ </span>http://<span class="highlight">your_server_ip</span></pre>
                     <p>You should receive the default Nginx landing page:</p>
-                    <p>IMAGE ???</p>
+                    <p><img src="default_page.png" alt="Nginx default page"></p>
                     <p>If you are on this page, your server is running correctly and is ready to be managed.</p>
                 </section>
 
@@ -124,48 +127,46 @@ Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
 
                 <section id="Setting_Up_Server_Blocks" class="main-section">
                     <header><h2>Setting Up Server Blocks</h2></header>
-                    <p>When using the Nginx web server, server blocks (similar to virtual hosts in Apache) can be used to encapsulate configuration details and host more than one domain from a single server. We will set up a domain called <strong>your_domain</strong>, but you should <strong>replace this with your own domain name</strong>. To learn more about setting up a domain name with DigitalOcean, please refer to our Introduction to DigitalOcean DNS.</p>
+                    <p>When using the Nginx web server, <em>server blocks</em> (similar to virtual hosts in Apache) can be used to encapsulate configuration details and host more than one domain from a single server. We will set up a domain called <strong>your_domain</strong>, but you should <strong>replace this with your own domain name</strong>. To learn more about setting up a domain name with DigitalOcean, please refer to our <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-digitalocean-dns" target="_blank">Introduction to DigitalOcean DNS</a>.</p>
                     <p>Nginx on Ubuntu 20.04 has one server block enabled by default that is configured to serve documents out of a directory at <code>/var/www/html</code>. While this works well for a single site, it can become unwieldy if you are hosting multiple sites. Instead of modifying <code>/var/www/html</code>, let’s create a directory structure within <code>/var/www/</code> for our <strong>your_domain</strong> site, leaving <code>/var/www/html</code> in place as the default directory to be served if a client request doesn’t match any other sites.</p>
                     <p>Create the directory for <strong>your_domain</strong> as follows, using the <code>-p</code> flag to create any necessary parent directories:</p>
-                    <pre><span class="no-select">$ </span>sudo mkdir -p /var/www/<em>your_domain/html</em></pre>
+                    <pre><span class="no-select">$ </span>sudo mkdir -p /var/www/<span class="highlight">your_domain</span>/html</pre>
                     <p>Next, assign ownership of the directory with the <code>$USER</code> environment variable:</p>
-                    <pre><span class="no-select">$ </span>sudo chown -R $USER:$USER /var/www/<em>your_domain/html</em></pre>
+                    <pre><span class="no-select">$ </span>sudo chown -R $USER:$USER /var/www/<span class="highlight">your_domain</span>/html</pre>
                     <p>The permissions of your web roots should be correct if you haven’t modified your <code>umask</code> value, which sets default file permissions. To ensure that your permissions are correct and allow the owner to read, write, and execute the files while granting only read and execute permissions to groups and others, you can input the following command:</p>
-                    <pre><span class="no-select">$ </span>sudo chmod -R 755 /var/www/<em>your_domain</em></pre>
+                    <pre><span class="no-select">$ </span>sudo chmod -R 755 /var/www/<span class="highlight">your_domain</span></pre>
                     <p>Next, create a sample <code>index.html</code> page using <code>nano</code> or your favorite editor:</p>
-                    <pre><span class="no-select">$ </span>nano /var/www/<em>your_domain</em>/html/index.html</pre>
+                    <pre><span class="no-select">$ </span>nano /var/www/<span class="highlight">your_domain</span>/html/index.html</pre>
                     <p>Inside, add the following sample HTML:</p>
 <pre>&lt;html&gt;
     &lt;head&gt;
-        &lt;title&gt;Welcome to your_domain!&lt;/title&gt;
+        &lt;title&gt;Welcome to <span class="highlight">your_domain</span>!&lt;/title&gt;
     &lt;/head&gt;
     &lt;body&gt;
-        &lt;h1&gt;Success!  The your_domain server block is working!&lt;/h1&gt;
+        &lt;h1&gt;Success!  The <span class="highlight">your_domain</span> server block is working!&lt;/h1&gt;
     &lt;/body&gt;
 &lt;/html&gt;</pre>
                     <p>Save and close the file by typing <code>CTRL</code> and <code>X</code> then <code>Y</code> and <code>ENTER</code> when you are finished.</p>
-                    <p>In order for Nginx to serve this content, it’s necessary to create a server block with the correct directives. Instead of modifying the default configuration file directly, let’s make a new one at <code>/etc/nginx/sites-available/<em>your_domain</em></code></p>
-                    <pre><span class="no-select">$ </span>sudo nano /etc/nginx/sites-available/<em>your_domain</em></pre>
+                    <p>In order for Nginx to serve this content, it’s necessary to create a server block with the correct directives. Instead of modifying the default configuration file directly, let’s make a new one at <code>/etc/nginx/sites-available/<span class="highlight">your_domain</span></code></p>
+                    <pre><span class="no-select">$ </span>sudo nano /etc/nginx/sites-available/<span class="highlight">your_domain</span></pre>
                     <p>Paste in the following configuration block, which is similar to the default, but updated for our new directory and domain name:</p>
 <pre>server {
     listen 80;
     listen [::]:80;
 
-    root /var/www/your_domain/html;
+    root /var/www/<span class="highlight">your_domain</span>/html;
     index index.html index.htm index.nginx-debian.html;
 
-    server_name your_domain www.your_domain;
+    server_name <span class="highlight">your_domain</span> www.<span class="highlight">your_domain</span>;
 
     location / {
         try_files $uri $uri/ =404;
     }
 }</pre>
                     <p>Notice that we’ve updated the <code>root</code> configuration to our new directory, and the <code>server_name</code> to our domain name.</p>
-                    <p></p>
-                    <pre><span class="no-select">$ </span>nano /var/www/<em>your_domain</em>/html/index.html</pre>           
                     <p>Next, let’s enable the file by creating a link from it to the <code>sites-enabled</code> directory, which Nginx reads from during startup:</p>         
                     <pre><span class="no-select">$ </span>sudo ln -s /etc/nginx/sites-available/<em>your_domain</em> /etc/nginx/sites-enabled/</pre>      
-                    <p>Two server blocks are now enabled and configured to respond to requests based on their <code>listen</code> and <code>server_name</code> directives (you can read more about how Nginx processes these directives here):</p>     
+                    <p>Two server blocks are now enabled and configured to respond to requests based on their <code>listen</code> and <code>server_name</code> directives (you can read more about how Nginx processes these directives <a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms" target="_blank">here</a>):</p>     
                     <ul>
                         <li><code>your_domain</code>: Will respond to requests for <code>your_domain</code> and <code>www.your_domain</code></li>
                         <li><code>default</code>: Will respond to any requests on port 80 that do not match the other two blocks</li>
@@ -185,7 +186,8 @@ Nginx HTTP (v6)            ALLOW       Anywhere (v6)</pre>
                     <pre><span class="no-select">$ </span>sudo nginx -t</pre>
                     <p>If there aren’t any problems, restart Nginx to enable your changes:</p>
                     <pre><span class="no-select">$ </span>sudo systemctl restart nginx</pre>
-                    <p>Nginx should now be serving your domain name. You can test this by navigating to <code>http://your_domain</code>, where you should see something like this:</p>
+                    <p>Nginx should now be serving your domain name. You can test this by navigating to <code>http://<span class="highlight">your_domain</span></code>, where you should see something like this:</p>
+                    <p><img src="first_block.png" alt="Nginx first server block"></p>
                 </section>
 
                 <section id="Nginx_Files_and_Directories" class="main-section">
