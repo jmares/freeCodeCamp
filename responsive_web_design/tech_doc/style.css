@@ -72,7 +72,7 @@ body {
     margin-left: 300px;
     font-family: 'Roboto', sans-serif;
     /*display: block;*/
-    padding: 10px;
+    padding: 20px;
 }
 
 .main-section {
@@ -80,11 +80,21 @@ body {
     line-height: 1.5;
 }
 
+.main-section img {
+    display: block;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    border: solid 2px #e5e5e5;
+}
+
 pre {
     overflow: auto;
     background-color: #ffffff;
     border: 1px solid #898989;
     padding: 5px;
+    border-radius: 5px;
   }
   
   /*pre {
@@ -104,10 +114,12 @@ pre, code {
 }
 code {
     padding: 2px 3px;
+    border-radius: 3px;
 }
 
 .highlight {
     background-color: rgba(242,201,76,.35);
+    border-radius: 3px;
 }
 
 .no-select {
