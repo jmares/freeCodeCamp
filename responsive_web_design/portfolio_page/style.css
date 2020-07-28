@@ -1,6 +1,7 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');*/
 /*@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');*/
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 *,
 *::before,
@@ -19,6 +20,10 @@
 * {
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 #navbar {
@@ -120,6 +125,15 @@ section {
     background-color: var(--bgcolor-contact);
     color: var(--peach-puff);
 }
+
+#projects h2,
+#technology h2,
+#contact h2 {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
 #contacts {
     display: flex;
     flex-direction: row;
@@ -128,6 +142,15 @@ section {
 .contactme {
     text-align: center;
     color: black;
+}
+
+#contact a {
+    text-decoration: none;
+    color: black;
+}
+
+#contact a:hover {
+    color: maroon;
 }
 
 footer {
@@ -151,7 +174,7 @@ footer {
 }
 @media screen and (max-width: 600px) {
     footer {
-        font-size: 16px;
+        font-size: 14px;
     }
     #navbar ul {
         margin-right: 5px;
@@ -166,5 +189,8 @@ footer {
     }
         #welcome-section h2 {
         font-size: 30px;
+    }
+    .facaption {
+        display: none;
     }
 }
