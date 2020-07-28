@@ -53,7 +53,7 @@
     color: azure;
     border: 1px solid azure;
     padding: 10px 20px;
-    border-radius: 5px;;
+    border-radius: 5px;
 }
 
 #navbar a:hover {
@@ -136,4 +136,35 @@ footer {
     text-align: center;
     font-size: 25px;
     padding: 25px 10px;
+}
+
+@media screen and (max-width: 800px) {
+    footer {
+        font-size: 20px;
+    }
+    #welcome-section h1 {
+        font-size: 60px;
+    }
+        #welcome-section h2 {
+        font-size: 40px;
+    }
+}
+@media screen and (max-width: 600px) {
+    footer {
+        font-size: 16px;
+    }
+    #navbar ul {
+        margin-right: 5px;
+        font-size: 16px;
+    }  
+    #navbar a {
+        padding: 5px 10px;
+        border-radius: 3px;
+    }  
+    #welcome-section h1 {
+        font-size: 50px;
+    }
+        #welcome-section h2 {
+        font-size: 30px;
+    }
 }
