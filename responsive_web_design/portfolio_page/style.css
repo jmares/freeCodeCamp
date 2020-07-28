@@ -113,6 +113,37 @@ section {
     padding-bottom: 100px;
 }
 
+#projectsholder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: space-evenly;
+    margin: 10px auto;
+}
+
+.project-tile {
+    border-radius: 5px;
+    margin: 5px;
+    background-color: maroon;
+    padding: 10px;
+    max-width: 300px;
+}
+
+.project-tile img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+    border-radius: 5px;
+}
+
+.project-tile figcaption {
+    font-style: italic;
+    color: white;
+    padding-top: 10px;
+    text-align: center;
+}
+
 #technology {
     padding-top: 100px;
     padding-bottom: 100px;
@@ -187,7 +218,7 @@ footer {
     #welcome-section h1 {
         font-size: 50px;
     }
-        #welcome-section h2 {
+    #welcome-section h2 {
         font-size: 30px;
     }
     .facaption {
