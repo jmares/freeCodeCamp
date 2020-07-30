@@ -1,5 +1,3 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');*/
-/*@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');*/
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -53,8 +51,6 @@ body {
 #navbar a {
     text-decoration: none;
     display: block;
-    /*color: var(--peach-puff);
-    border: 1px solid var(--peach-puff);*/
     color: azure;
     border: 1px solid azure;
     padding: 10px 20px;
@@ -83,8 +79,6 @@ section {
     width: 100%;
     height: 100vh;
     background-color: var(--bgcolor-welcome);  
-    /*font-family: 'Righteous', cursive;*/
-    /*font-family: 'Pacifico', cursive;*/
     font-family: 'Marck Script', cursive;
     color: goldenrod;
 }
