@@ -1,0 +1,12 @@
+{
+  "name": "roman-numeral-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "roman-numeral-converter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "roman-numeral-converter.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
