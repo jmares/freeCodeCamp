@@ -1,12 +1,12 @@
 {
   "name": "caesars-cipher",
   "version": "1.0.0",
-  "description": "",
   "main": "caesars-cipher.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "caesars-cipher.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }
