@@ -1,0 +1,12 @@
+{
+  "name": "telephone-validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "telephone-validator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "telephone-validator.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
