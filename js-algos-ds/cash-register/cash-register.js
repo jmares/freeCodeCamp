@@ -30,10 +30,9 @@ function checkCashRegister(price, cash, cid) {
     output.change = cid;
   } else {
     let revCID = cid.reverse();
-    let calcChange = change;
     for (let i = 0; i < denom.length; i++) {
-      if ((calcChange > denom[i].value) && revCID[i][1] > 0) {
-        
+      if ((change > 0 ) && (change > denom[i].value) && (revCID[i][1] > 0)) {
+        // hier komt rest van de code
       } 
       console.log(denom[i]);
     }
