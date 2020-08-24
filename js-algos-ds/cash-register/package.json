@@ -1,0 +1,12 @@
+{
+  "name": "cash-register",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cash-register.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cash-register.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
