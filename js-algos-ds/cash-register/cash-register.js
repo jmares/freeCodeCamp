@@ -22,7 +22,6 @@ function checkCashRegister(price, cash, cid) {
   let change = cash - price;
   let output = { status: null, change: [] };
   let amountCID = cashInDrawer(cid);
-  //console.log("amountCID = " + amountCID + "| change = " + change);
   if (amountCID < change) {
     output.status = "INSUFFICIENT_FUNDS";
   } else if ( amountCID == change) {
@@ -33,7 +32,6 @@ function checkCashRegister(price, cash, cid) {
     let newChange = change;
     let arr = [];
     for (let i = 0; i < denom.length; i++) {
-      //console.log(newChange + " \ " + denom[i].name + " " + denom[i].val + " / " + revCID[i][1]);
       if ((newChange >= 0.0 ) && (newChange >= denom[i].val) && (revCID[i][1] > 0.0)) {
         let x = Math.floor(newChange / denom[i].val);
         let y = Math.floor(revCID[i][1] / denom[i].val);
@@ -56,9 +54,6 @@ function checkCashRegister(price, cash, cid) {
       output.status = "INSUFFICIENT_FUNDS";
       output.change = [];  
     }
-    //console.log(revCid);
-    //.status = "BUSY";
-    //output.change = ["BUSY"];
   }
   return output;
 }
