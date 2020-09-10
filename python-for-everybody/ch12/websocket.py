@@ -1,8 +1,11 @@
 import socket
 
 mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-mysock.connect(('www.py4inf.com', 80))
-mysock.send('GET http://www.py4inf.com/code/romeo.txt HTTP/1.0\n\n')
+mysock.connect(('www.pannix.net', 80))
+cmd ='GET http://www.pannix.net/index.html HTTP/1.0\n\n'.encode()
+#mysock.connect(('data.pr4e.org', 80))
+#cmd ='GET http://data.pr4e.org/romeo.txt HTTP/1.1\n\n'.encode()
+mysock.send(cmd)
 
 while True:
     data = mysock.recv(512)
