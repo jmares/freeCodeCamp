@@ -23,28 +23,21 @@ def add_time(start, duration, day = None):
         end_dict["days"] = end_dict["hours"] // 24
         end_dict["hours"] = end_dict["hours"] % 24
     if end_dict["hours"] >= 12:
-        end_dict["12hours"] = "PM"
+        end_dict["12hour"] = "PM"
         end_dict["hours"] -= 12
     else:
-        end_dict["12hours"] = "AM"
+        end_dict["12hour"] = "AM"
     if end_dict["hours"] == 0: end_dict["hours"] += 12
 
     if day:
-        index = (days.index(day) + end_dict.get("days", 0)) % 6
+        index = (days.index(day) + end_dict.get("days", 0)) % 7
         end_dict["day"] = days[index]
 
-
-    print(end_dict)
-
-    new_time = False
-
-
-
+    new_time = str(end_dict["hours"]) + ":"
+    if end_dict["minutes"] < 10: new_time += "0"
+    new_time += str(end_dict["minutes"]) + " " + end_dict["12hour"]
+    if day: new_time += ", " + end_dict["day"]
+    if end_dict.get("days", 0) == 1: new_time += " (next day)"
+    if end_dict.get("days", 0) > 1: new_time += " (" + str(end_dict["days"]) + " days later)"
+    
     return new_time
-
-add_time("3:00 PM", "3:10")
-add_time("11:30 AM", "2:32", "Monday")
-add_time("11:43 AM", "0:20")
-add_time("10:10 PM", "3:30")
-add_time("11:43 PM", "24:20", "tueSday")
-add_time("6:30 PM", "205:12")
