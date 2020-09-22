@@ -47,10 +47,8 @@ class Category(object):
         return "\n".join(lines)
 
 
-
-
 def create_spend_chart(categories):
-    title = "Percentage spend by category"
+    title = "Percentage spent by category"
     bar_chart = []
     x_axis = ""
     legend = []
@@ -60,12 +58,55 @@ def create_spend_chart(categories):
         line = str(i * 10).rjust(3) + "|"
         bar_chart.append(line)
 
+    # creating the chart
+    spending = {}
+    total_spending = 0
+
+    for category in categories:
+        for item in category.ledger:
+            if item["amount"] < 0:
+                total_spending += abs(item["amount"])
+                spending[category.name] = spending.get(category.name, 0) + abs(item["amount"])
+    
+    percent_spending = []
+    for category in categories:
+        percentage =(100.0 * spending[category.name] / total_spending) // 10 * 10
+        percent_spending.append(int(percentage))
+
+    for i in range(11):
+        for cat in percent_spending:
+            if cat >= i * 10:
+                bar_chart[i] += " o "
+            else:
+                bar_chart[i] += "   "
+
+    # creating the x-axis
+    x_axis = "    " + "".rjust(len(categories) * 3, "-") + "-"
+
+    # creating the legend
+    max_length = 0
+    for category in categories:
+        if len(category.name) > max_length:
+            max_length = len(category.name)
+    
+    for i in range(max_length):
+        line = "    "
+        for category in categories:
+            if i < len(category.name):
+                line += " " + category.name[i] + " "
+            else:
+                line += "   "
+        legend.append(line)
+
+    # creating the result 
     result = title + "\n"
     for i in range(10, -1, -1):
-        result += bar_chart[i] + "\n"
-    x_axis = "    ---------------"
+        result += bar_chart[i] + " \n"
     result += x_axis + "\n"
+    for line in legend:
+        result += line + " \n"
+    result = result.rstrip("\n")
     return result
 
-print(create_spend_chart(['blabla']))
-
+# Had to remove the trailing '\n' and add extra space at the 
+# end of lines ' \n' instead of '\n' to pass the tests
