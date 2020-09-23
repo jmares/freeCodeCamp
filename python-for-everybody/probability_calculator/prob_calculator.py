@@ -7,7 +7,7 @@ class Hat(object):
         self.contents = []
         for key, value in kwargs.items():
             self.contents.extend([key] * value)
-        random.shuffle(self.contents)
+        #random.shuffle(self.contents)
 
     def draw(self, number):
         drawn = []
@@ -24,4 +24,22 @@ class Hat(object):
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    pass
+    desired_outcomes = 0
+    for _ in range(num_experiments):
+        hat_copy = copy.deepcopy(hat)
+        draw = hat_copy.draw(num_balls_drawn)
+        draw_dict = dict()
+        
+        for ball in draw:
+            draw_dict[ball] = draw_dict.get(ball, 0) + 1
+        
+        match = True
+        for key, value in expected_balls.items():
+            # key = ball and value = number
+            if key not in draw_dict or draw_dict[key] < value:
+                match = False
+                break
+        if match:
+            desired_outcomes += 1
+
+    return desired_outcomes / num_experiments
