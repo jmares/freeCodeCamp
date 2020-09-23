@@ -28,7 +28,12 @@ class Rectangle:
             return ("*" * self.width + "\n") * self.height
 
     def get_amount_inside(self, shape):
-        pass
+        if self.width < shape.width or self.height < shape.height:
+            return 0
+        times_width = self.width // shape.width
+        times_height = self.height // shape.height
+        return times_height * times_width
+        
 
 class Square(Rectangle):
     def __init__(self, side):
